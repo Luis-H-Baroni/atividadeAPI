@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-br" ng-app="minhaApp" ng-controller="meuController" ng-init="carregarDados()">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.png">
+
+    <title>FutBR</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" width="30" class="d-inline-block align-top"> FutBR
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="#seriea">Série A</a>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input ng-model="nomeTime" class="form-control mr-sm-2" type="text" placeholder="Pesquisar Times"
+                    aria-label="Search">
+                <button ng-click="pesquisaTime(nomeTime)" href="#pesquisa" class="btn  my-2 my-sm-0"
+                    type="submit">Pesquisar</button>
+            </form>
+        </div>
+    </nav>
+
+    <main role="main">
+
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3 text-center mt-5">Bem vindo ao FutBR</h1>
+                <p class="text-center">A sua melhor fonte para conhecer o esporte, focado no Futebol Brasileiro da Série
+                    A.</p>
+
+            </div>
+        </div>
+
+        <div class="container mb-5">
+            <div class="row d-flex justify-content-center">
+                <h1 class="text-center">{{timeDetalhes.strTeam}}</h1>
+
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-12 col-lg-6 ">
+
+                    <p class="mt-5">Nomes Alternativos: {{timeDetalhes.strAlternate}}</p>
+                    <p>Fundado em {{timeDetalhes.intFormedYear}}.</p>
+                    <p>Estádio: {{timeDetalhes.strStadium}},
+                        {{timeDetalhes.strStadiumLocation}}, {{timeDetalhes.intStadiumCapacity}} lugares.</p>
+
+                    <div class="row mb-5">
+                        <div class="col mt-3 ">
+                            <p>Ultimos Jogos:</p>
+                            <div ng-repeat="i in calendario">
+                                {{i.dateEvent}} | {{i.strLeague}} | {{i.strEvent}}
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-md-8  col-lg-6 d-flex justify-content-center">
+                    <img style="width: 100%; height: 100%; padding: 10px;" ng-src="{{timeDetalhes.strTeamBadge}}"
+                        alt="">
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div id="pesquisa" class="container">
+            <div class="row d-flex justify-content-center">
+                <div style="margin-bottom: 40px;" class="col p-3" ng-repeat="i in pesquisa"
+                    ng-click="lookupTime(i.idTeam)">
+
+                    <div class="row  d-flex justify-content-center">
+                        <h2 class="text-justify">{{i.strTeam}}</h2>
+                    </div>
+
+                    <div class="row  d-flex justify-content-center"><a href="#"><img
+                                style="width: 200px; text-align: center;" ng-src="{{i.strTeamBadge}}" alt=""></a></div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <hr>
+
+        <div id="seriea" class="container">
+            <h1 class="text-center" style="margin-bottom: 50px;">Times da Série A</h1>
+
+            <div class="row">
+                <div style="margin-bottom: 40px;" class="col p-3" ng-repeat="i in times"
+                    ng-click="lookupTime(i.idTeam)">
+
+                    <div class="row  d-flex justify-content-center">
+                        <h2>{{i.strTeam}}</h2>
+                    </div>
+
+                    <div class="row  d-flex justify-content-center"><a href="#"><img
+                                style="width: 200px; text-align: center;" ng-src="{{i.strTeamBadge}}" alt=""></a></div>
+
+
+                </div>
+
+            </div>
+
+            <hr>
+
+        </div> <!-- /container -->
+
+    </main>
+
+    <footer class="container">
+        <p>&copy; Luis Henrique Baroni 2021 F. D. WEB</p>
+    </footer>
+
+    <!-- JavaScript (Opcional) -->
+    <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
